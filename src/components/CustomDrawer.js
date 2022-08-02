@@ -16,8 +16,16 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {AuthContext} from '../navigation/AuthProvider';
 import {firestore} from '../../firebase';
 import ThemeContext from "../utils/ThemeContext";
-
+import {
+  useFonts,
+  Roboto_500Medium
+  
+} from '@expo-google-fonts/roboto';
 const CustomDrawer = props => {
+  let [fontsLoaded] = useFonts({
+    Roboto_500Medium
+  });
+
   const theme = useContext(ThemeContext);
   const {user,logout} = useContext(AuthContext);
   const [userData,setUserData] = useState();
@@ -50,7 +58,7 @@ const onShare = async () => {
         >
 
         <View style={{flex: 1, paddingTop: 10}}>
-          <DrawerItemList {...props} />
+          <DrawerItemList  {...props} />
         </View>
       </DrawerContentScrollView>
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc'}}>
@@ -60,7 +68,7 @@ const onShare = async () => {
             <Text
               style={{
                 fontSize: 15,
-                fontFamily: 'Roboto-Medium',
+                fontFamily: 'Roboto_500Medium',
                 marginLeft: 5,
                 color:theme.icon_inactivecolor
               }}>
@@ -74,7 +82,7 @@ const onShare = async () => {
             <Text
               style={{
                 fontSize: 15,
-                fontFamily: 'Roboto-Medium',
+                fontFamily: 'Roboto_500Medium',
                 marginLeft: 5,
                 color:theme.icon_inactivecolor
               }}>

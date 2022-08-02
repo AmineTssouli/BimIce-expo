@@ -6,19 +6,24 @@ import CustomInput from '../components/CustomInput';
 import Google from '../assets/images/misc/google.svg';
 import Facebook from '../assets/images/misc/facebook.svg';
 import Apple from '../assets/images/misc/apple.svg';
+import IceImg from '../assets/images/misc/Ice.svg';
 import {AuthContext} from '../navigation/AuthProvider';
 import ThemeContext from "../utils/ThemeContext";
-
+import AppLoading from 'expo-app-loading';
+import {
+  useFonts,
+  Roboto_900Black_Italic,
+} from '@expo-google-fonts/roboto';
 
 
 const LoginScreen = ( { navigation }) => {
-
+  
   const theme =useContext(ThemeContext);
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [isSelected, setSelection] = useState(true);
   const {login, user} = useContext(AuthContext);
-
+  
 
   const [inputs,setInputs] = useState({
   email :'',
@@ -75,6 +80,13 @@ const LoginScreen = ( { navigation }) => {
     setErrors(prevState =>({...prevState,[input]:message}));
   
   }
+  let [fontsLoaded] = useFonts({
+    Roboto_900Black_Italic,
+
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   return (
     <SafeAreaView  style= {{ 
@@ -86,9 +98,9 @@ const LoginScreen = ( { navigation }) => {
    
       }}>
        <StatusBar animated ={true} barStyle={theme.barStyle} backgroundColor={theme.backgroundcolor} />
-        <View style={{marginTop:10,marginBottom:30}}>
-      <ImageBackground source={require('../../src/assets/images/logo.png')} style={{width:200,height:200}}  />
-      <Text style={{textAlign:'center',marginTop:10,fontSize:30, fontWeight:'bold', color:theme.textcolor,fontFamily:'Inter-Bold' }}>Welcome</Text>
+        <View style={{marginBottom:40}}>
+        <IceImg width={180} height={180} style={{marginTop:40,transform:[{rotate:'-15deg'}]}} /> 
+      <Text style={{textAlign:'center',marginTop:40,fontSize:30, fontWeight:'bold', color:theme.textcolor,fontFamily:'Roboto_900Black_Italic',fontSize:34}}>Welcome</Text>
       </View>
 
       <View style={{width:'80%'}}>  

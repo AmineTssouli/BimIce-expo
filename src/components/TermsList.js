@@ -6,11 +6,21 @@ import { getAuth } from "firebase/auth";
 import { ActivityIndicator } from 'react-native';
 import { event } from 'react-native-reanimated';
 import ThemeContext from "../utils/ThemeContext";
+import {
+  useFonts,
+  Roboto_700Bold,
+  Roboto_400Regular_Italic
+} from '@expo-google-fonts/roboto';
 
 
 const TermsList = ({ terms , search, navigation }) => {
+    let [fontsLoaded] = useFonts({
+      Roboto_700Bold,
+      Roboto_400Regular_Italic
 
+    });
 
+    const auth = getAuth();
     const fListRef = useRef();
     const  theme = useContext(ThemeContext);
     const terms_length = terms.length;
@@ -109,16 +119,21 @@ const TermsList = ({ terms , search, navigation }) => {
 
       return (
         <View style={[styles.item,{borderColor:theme.section_bordercolor,backgroundColor:theme.section_backgroundcolor}]} key={id} index={index} >
+     
+
             <Text value={name} numberOfLines={2} style={styles.name}>{name}</Text>
-            <Text value={description}  style={styles.description}>{description}</Text>
-            <View  style={{marginRight:5,marginTop:10,alignItems:'flex-end'}}>
-             
-            {console.log("bookrmarked",bookmarked)}
+            <Text value={description} numberOfLines={2}  style={styles.description}>{description}</Text>
+            <View  style={{marginRight:5,marginTop:10,flexDirection:'row',justifyContent:'space-between'}}>
+             <TouchableOpacity  onPress={() => {navigation.navigate('Term',{'termID':id,'origin':'Home'}); }}><Ionicons name='folder-open-outline' size={27} color='#AD40AF' /></TouchableOpacity>
+           
+
+            
             {
+              !auth.currentUser.isAnonymous?
             !bookmarked.includes(id)?<TouchableOpacity onPress={() => {bookmarkIT(name,description,id); setLoading(true); setScrollPosition(index);}}><Ionicons name='bookmark-outline' size={27} color='#AD40AF' /></TouchableOpacity>
             :<TouchableOpacity onPress={() =>{unbookmarkIT(id); setLoading(true); setScrollPosition(index)}}><Ionicons name='bookmark-sharp' size={27} color='#AD40AF' /></TouchableOpacity>
-            } 
-                  
+             :<Text> </Text>  
+          }    
             </View>
         </View>
       );
@@ -139,6 +154,7 @@ const TermsList = ({ terms , search, navigation }) => {
       }
  
     };
+
 
     const NotFound = () => {
       return (
@@ -190,13 +206,13 @@ const styles = StyleSheet.create({
     },
     name: {
       fontSize: 20,
-      fontFamily: 'Roboto-Bold',
+      fontFamily: 'Roboto_700Bold',
       marginBottom:15,
       color:'#333'
     },
     description :{
       fontSize:16,
-      fontFamily: 'Roboto-Regular',
+      fontFamily: 'Roboto_400Regular_Italic',
       textAlign:'justify',
       color:'#333'
     }

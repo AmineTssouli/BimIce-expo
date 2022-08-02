@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView,Keyboard } from 'react-native'
+import { View, Text, SafeAreaView,Keyboard,StatusBar} from 'react-native'
 import React,{useContext, useState} from 'react'
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
@@ -54,7 +54,7 @@ const ResetpasswordScreen = () => {
       
    
       }}>
-   
+    <StatusBar animated ={true} barStyle={theme.barStyle} backgroundColor={theme.backgroundcolor} />
        {loading ? <Loading />:<>
        <View style={{marginTop:-50,padding:30,marginHorizontal:10}}>
         <Text style={{fontSize:30, fontWeight:'bold', color:theme.textcolor,fontFamily:'Inter-Bold',marginVertical:20}}>Reset Password</Text>

@@ -7,9 +7,15 @@ import  Checkbox  from "expo-checkbox";
 import Google from '../assets/images/misc/google.svg';
 import Facebook from '../assets/images/misc/facebook.svg';
 import Apple from '../assets/images/misc/apple.svg';
+import IceImg from '../assets/images/misc/Ice.svg';
 import {AuthContext} from '../navigation/AuthProvider';
 import ThemeContext from "../utils/ThemeContext";
-
+import AppLoading from 'expo-app-loading';
+import {
+  useFonts,
+  Roboto_900Black_Italic,
+  Roboto_400Regular
+} from '@expo-google-fonts/roboto';
 
 
 
@@ -102,6 +108,15 @@ const SignupScreen = ({ navigation }) => {
     setErrors(prevState =>({...prevState,[input]:message}));
   
   }
+
+  let [fontsLoaded] = useFonts({
+    Roboto_900Black_Italic,
+    Roboto_400Regular
+
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
   return (
     <SafeAreaView style = {{ flex:1,
       justifyContent:'center',
@@ -115,9 +130,10 @@ const SignupScreen = ({ navigation }) => {
           <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
         <StatusBar animated ={true} barStyle={theme.barStyle} backgroundColor={theme.backgroundcolor} />
                 <View>
-                  <ImageBackground source={require('../../src/assets/images/logo.png')} style={{ marginTop:20,width:200,height:200}}  />
+                <IceImg width={180} height={180} style={{marginTop:40,transform:[{rotate:'-15deg'}]}} /> 
+                 
                 </View>
-      <Text style={{marginTop:10,marginBottom:50,fontSize:30, fontWeight:'bold', color:theme.textcolor,fontFamily:'Inter-Bold' }}>Register Now</Text>
+      <Text style={{marginTop:40,marginBottom:50,fontSize:34, fontWeight:'bold', color:theme.textcolor,fontFamily:'Roboto_900Black_Italic' }}>Register Now</Text>
       <View style= {{flexDirection:'row',marginTop:20,marginBottom:20}}>
               <TouchableOpacity
                   onPress={()=>{ }}
@@ -160,7 +176,7 @@ const SignupScreen = ({ navigation }) => {
             </TouchableOpacity>
         </View>
         <Text style={{marginBottom:20,color:theme.textcolor}}>or, register with email</Text>
-      <View style={{fontFamily:'Roboto-Regular'}}>
+      <View style={{fontFamily:'Roboto_400Regular'}}>
          <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',marginBottom:10}}>  
          <CustomRadiobutton uncheckedColor={theme.textcolor} value='Student' status={ checked === 'Student' ? 'checked' : 'unchecked' }  onPress={() => setChecked('Student')} />
          <CustomRadiobutton  uncheckedColor={theme.textcolor}  value='Teacher' status={ checked === 'Teacher' ? 'checked' : 'unchecked' }  onPress={() => setChecked('Teacher')} />

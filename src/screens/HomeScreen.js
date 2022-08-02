@@ -75,7 +75,7 @@ const getAllTerms =  async () => {
       
 
     })
-    console.log("from home screen",terms);
+   
 
     setAllTerms([]);
     setAllTerms(terms);
@@ -109,7 +109,9 @@ const getAllTerms =  async () => {
             borderRadius:8,
             borderColor:border ?? border,
             paddingHorizontal:10,
-            paddingVertical:8}} >
+            paddingVertical:8,
+            marginBottom:10
+            }} >
             <Feather name='search' size={22} color='#C6C6C6' style={{marginRight:5,marginTop:3}} />
             <TextInput placeholderTextColor='gray' placeholder="Type here to search" style={{flex:1, padding:0, color:theme.textcolor}}
             value={search}
@@ -123,7 +125,7 @@ const getAllTerms =  async () => {
 
         </View> 
     
-        <View  
+{/*         <View  
          style={{
             marginVertical:15,
             flexDirection:'row',
@@ -133,7 +135,7 @@ const getAllTerms =  async () => {
         <TouchableOpacity>
             <Text style={{color:'#AD40AF'}}>See all</Text>
         </TouchableOpacity>
-        </View>
+        </View> */}
 
 
           

@@ -3,12 +3,22 @@ import { View, Text,FlatList,StyleSheet ,StatusBar,TouchableOpacity} from 'react
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ThemeContext from "../utils/ThemeContext";
 import { collection,query,where, getDocs, getDoc,setDoc, doc ,deleteDoc,getFirestore } from "firebase/firestore"; 
-import { getAuth } from "firebase/auth";     
+import { getAuth } from "firebase/auth";    
+import {
+  useFonts,
+  Roboto_700Bold,
+  Roboto_400Regular_Italic
+} from '@expo-google-fonts/roboto';
+
 
 
 
 const BookmarksList = ({  search,navigation }) => {
+  let [fontsLoaded] = useFonts({
+    Roboto_700Bold,
+    Roboto_400Regular_Italic
 
+  });
     const theme = useContext(ThemeContext);
     
     const [bookmarks,setBookmarks] = useState([]);
@@ -81,10 +91,11 @@ const BookmarksList = ({  search,navigation }) => {
       
 
       return (
-        <View  style={[styles.item,{borderColor:theme.section_bordercolor}]} key={id} >
+        <View  style={[styles.item,{borderColor:theme.section_bordercolor,backgroundColor:theme.section_backgroundcolor}]} key={id} >
             <Text value={name} numberOfLines={2} style={styles.name}>{name}</Text>
-            <Text value={description}  style={styles.description}>{description}</Text>
-            <View  style={{marginRight:5,marginTop:20,alignItems:'flex-end'}}>
+            <Text value={description}  numberOfLines={2}  style={styles.description}>{description}</Text>
+            <View  style={{marginRight:5,marginTop:10,flexDirection:'row',justifyContent:'space-between'}}>
+            <TouchableOpacity  onPress={() => {navigation.navigate('Term',{'termID':id,'origin':'Bookmarks'}); }}><Ionicons name='folder-open-outline' size={27} color='#AD40AF' /></TouchableOpacity>
             <TouchableOpacity onPress={() =>{unbookmarkIT(id);  setLoading(!loading);}}><Ionicons name='bookmark-sharp' size={27} color='#AD40AF' /></TouchableOpacity>
         
                   
@@ -133,31 +144,30 @@ const BookmarksList = ({  search,navigation }) => {
       );
 }
 const styles = StyleSheet.create({
-    container: {
-      flex: 1
-      
-    },
-    item: {
-      backgroundColor: '#d3e8d9',
-      padding: 15,
-      marginVertical: 8,
-      borderWidth:1,
-      borderRadius:14,
-    },
-    name: {
-      fontSize: 20,
-      fontFamily: 'Roboto-Medium',
-      marginBottom:15,
-      color:'#333'
-      
-    },
-    description :{
-      fontSize:16,
-      fontFamily: 'Roboto-Regular',
-      textAlign:'justify',
-      color:'#333'
-    }
-  });
-  
+  container: {
+    flex: 1
+    
+  },
+  item: {
+    padding: 15,
+    marginVertical: 8,
+    borderWidth:1,
+    borderRadius:14,
+ 
+  },
+  name: {
+    fontSize: 20,
+    fontFamily: 'Roboto_700Bold',
+    marginBottom:15,
+    color:'#333'
+  },
+  description :{
+    fontSize:16,
+    fontFamily: 'Roboto_400Regular_Italic',
+    textAlign:'justify',
+    color:'#333'
+  }
+});
+
 
 export default BookmarksList;

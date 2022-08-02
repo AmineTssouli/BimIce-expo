@@ -52,9 +52,10 @@ const Router = () => {
 };
 
 const App = () => {
+
   return(
     <AuthProvider>
-       
+
           <Router />
      
     </AuthProvider>

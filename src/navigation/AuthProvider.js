@@ -1,7 +1,7 @@
 import React,{ createContext, useState } from 'react';
 import { Alert }from 'react-native';
 import { auth,db} from '../../firebase'
-import { getAuth  ,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail } from 'firebase/auth';
+import { getAuth  ,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail, signInAnonymously} from 'firebase/auth';
 
 
 
@@ -62,6 +62,11 @@ export const AuthProvider = ({  children  }) => {
 
                   
                 }
+            },
+            guest: async() => {
+              const auth = getAuth();
+              await signInAnonymously(auth);
+
             },
             register : async (email,password,profession,fullname) => {
                 setErr({});
