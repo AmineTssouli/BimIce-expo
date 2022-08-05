@@ -1,4 +1,4 @@
-import { View, Text ,SafeAreaView,TouchableOpacity, ImageBackground, ScrollView, Keyboard,StatusBar} from 'react-native'
+import { View, Text ,SafeAreaView,TouchableOpacity, KeyboardAvoidingView,TouchableWithoutFeedback, ScrollView, Keyboard,StatusBar} from 'react-native'
 import React, { useContext, useState } from 'react'
 import CustomButton from '../components/CustomButton';
 import CustomRadiobutton from '../components/CustomRadiobutton';
@@ -124,12 +124,19 @@ const SignupScreen = ({ navigation }) => {
       }} >
       <StatusBar animated ={true} barStyle={theme.barStyle} backgroundColor={theme.backgroundcolor} />
         <ScrollView showsVerticalScrollIndicator={false}>
+        <KeyboardAvoidingView
+    
+    behavior={Platform.OS === "ios" ? "position" : "height"}
+    style={{flex:1,backgroundColor:theme.backgroundcolor}}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
         <StatusBar animated ={true} barStyle={theme.barStyle} backgroundColor={theme.backgroundcolor} />
                 <View>
                 <IceImg width={180} height={180} style={{marginTop:40,transform:[{rotate:'-15deg'}]}} /> 
                  
                 </View>
+                
       <Text style={{marginTop:40,marginBottom:50,fontSize:34, fontWeight:'bold', color:theme.textcolor,fontFamily:'Roboto_900Black_Italic' }}>Register Now</Text>
       <View style= {{flexDirection:'row',marginTop:20,marginBottom:20}}>
               <TouchableOpacity
@@ -173,40 +180,42 @@ const SignupScreen = ({ navigation }) => {
             </TouchableOpacity>
         </View>
         <Text style={{marginBottom:20,color:theme.textcolor}}>or, register with email</Text>
-      <View style={{fontFamily:'Roboto_400Regular'}}>
-         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',marginBottom:10}}>  
-         <CustomRadiobutton uncheckedColor={theme.textcolor} value='Student' status={ checked === 'Student' ? 'checked' : 'unchecked' }  onPress={() => setChecked('Student')} />
-         <CustomRadiobutton  uncheckedColor={theme.textcolor}  value='Teacher' status={ checked === 'Teacher' ? 'checked' : 'unchecked' }  onPress={() => setChecked('Teacher')} />
-         </View>
-         <CustomInput icon='email' value={email} placeholder ='Email' inputType='email-address'  onChangeText={text => { handleOnChange(text,'email')}} onFocus= {() => { handleError(null,'email')}}  error={errors.email}  />
-         <CustomInput icon='lock' value={password} placeholder ='Password'  secure={true} onChangeText={text => { handleOnChange(text,'password')}} onFocus= {() => { handleError(null,'password')}}  error={errors.password}  />
-         <CustomInput icon='lock' value={confirmPassword} placeholder ='Confirm password'  secure={true} onChangeText={text => { handleOnChange(text,'confirmPassword')}} onFocus= {() => { handleError(null,'confirmPassword')}}  error={errors.confirmPassword}  />
-         <CustomInput icon='user' value={fullname} placeholder ='Full name'  onChangeText={text => { handleOnChange(text,'fullname')}} onFocus= {() => { handleError(null,'fullname')}}  error={errors.fullname} />
-         
-
-           <View style={{flexDirection:'row',marginBottom:10}}>
-                <Checkbox
-                
-                color='#61CE70'
-                value={true}
-      
-                style={{marginLeft:5,marginRight:10}}
-                />
-                <Text style={{color:'gray',fontSize:12,textAlign:'justify'}}>By clicking Sign up, you agree to our terms and conditions</Text>
+        <View style={{fontFamily:'Roboto_400Regular'}}>
+          <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',marginBottom:10}}>  
+          <CustomRadiobutton uncheckedColor={theme.textcolor} value='Student' status={ checked === 'Student' ? 'checked' : 'unchecked' }  onPress={() => setChecked('Student')} />
+          <CustomRadiobutton  uncheckedColor={theme.textcolor}  value='Teacher' status={ checked === 'Teacher' ? 'checked' : 'unchecked' }  onPress={() => setChecked('Teacher')} />
           </View>
+          <CustomInput icon='email' value={email} placeholder ='Email' inputType='email-address'  onChangeText={text => { handleOnChange(text,'email')}} onFocus= {() => { handleError(null,'email')}}  error={errors.email}  />
+          <CustomInput icon='lock' value={password} placeholder ='Password'  secure={true} onChangeText={text => { handleOnChange(text,'password')}} onFocus= {() => { handleError(null,'password')}}  error={errors.password}  />
+          <CustomInput icon='lock' value={confirmPassword} placeholder ='Confirm password'  secure={true} onChangeText={text => { handleOnChange(text,'confirmPassword')}} onFocus= {() => { handleError(null,'confirmPassword')}}  error={errors.confirmPassword}  />
+          <CustomInput icon='user' value={fullname} placeholder ='Full name'  onChangeText={text => { handleOnChange(text,'fullname')}} onFocus= {() => { handleError(null,'fullname')}}  error={errors.fullname} />
+          
 
-       
-        </View>
-        <CustomButton label='Sign up' onPress={ validate } />
+            <View style={{flexDirection:'row',marginBottom:10}}>
+                  <Checkbox
+                  
+                  color='#61CE70'
+                  value={true}
         
-        <View style={{flexDirection:'row',justifyContent:'center',marginBottom:40}}>
-        <Text style={{color:theme.textcolor}}>Already registered? </Text>
-        <TouchableOpacity onPress={() => { navigation.navigate('Login')}}>
-          <Text style={{color:'#61CE70',fontWeight:'700'}}>Login</Text>
-        </TouchableOpacity>
-        </View>
+                  style={{marginLeft:5,marginRight:10}}
+                  />
+                  <Text style={{color:'gray',fontSize:12,textAlign:'justify'}}>By clicking Sign up, you agree to our terms and conditions</Text>
+            </View>
+
+        
+          </View>
+          <CustomButton label='Sign up' onPress={ validate } />
+          
+          <View style={{flexDirection:'row',justifyContent:'center',marginBottom:40}}>
+            <Text style={{color:theme.textcolor}}>Already registered? </Text>
+            <TouchableOpacity onPress={() => { navigation.navigate('Login')}}>
+              <Text style={{color:'#61CE70',fontWeight:'700'}}>Login</Text>
+            </TouchableOpacity>
+          </View>
         
         </View>
+        </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
         </ScrollView>
         
     </SafeAreaView>

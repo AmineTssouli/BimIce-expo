@@ -57,7 +57,7 @@ const AppStack = () => {
 
 
   
-  if(!isVerified) {
+  if(!isVerified && !auth.currentUser.isAnonymous) {
     return <VerifyemailScreen />
   }
   else 

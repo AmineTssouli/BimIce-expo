@@ -1,8 +1,10 @@
-import { View, Text,SafeAreaView ,TouchableOpacity, Linking,StatusBar} from 'react-native'
+import { View, Text,SafeAreaView ,TouchableOpacity, Linking,StatusBar,Image} from 'react-native'
 import React, { useContext } from 'react'
 import Facebook from '../assets/images/misc/facebook.svg';
 import Instagram from '../assets/images/misc/instagram.svg';
 import Website from '../assets/images/misc/website.svg';
+import Lab from '../assets/images/misc/lab-logo.svg';
+
 import ThemeContext from "../utils/ThemeContext";
 
 import {windowHeight} from '../utils/Dimensions';
@@ -33,11 +35,12 @@ const AboutScreen = () => {
               fontSize: 20,
               fontFamily: 'Roboto_500Medium',
               
-            }}>What is BIM-ICE</Text>
+            }}>What is BIMOLOGY</Text>
      </View>
      <View style={{marginVertical:5}}>
       <Text style={{textAlign:'justify',fontFamily: 'Roboto_500Medium',marginVertical:10,color:theme.textcolor}}>
-      BIM ICE Project standing for “BIM Integration in Higher and Continuing Education” seeks to accelerate BIM implementation in the field of construction and building design in Finland and Russia. Addressing such topical issues as lack of common terminology in the field and development phase of standardization,  lack of technical know-how and lack of competence in process development, the Project is aimed at improving productivity and quality within the construction industry by developing new training models and increasing the level of education among different target groups.</Text>
+      BIMOLOGY it's a project that aims to help students who lacks the common terminology in field of construction and building design. It's a splendid fruitful collabrotation between LAB University Of Applied Sciences and BIM-ICE.
+      </Text>
      </View>
      <View  style={{marginTop:10}}>
       <Text style={{
@@ -48,8 +51,8 @@ const AboutScreen = () => {
             }}>Project Manager</Text>
      </View>
      <View style={{marginVertical:5}}>
-     <Text style={{textAlign:'justify',fontWeight:'900',fontFamily: 'Roboto_500Medium',marginVertical:10,color:theme.textcolor}}>Eliisa Punttila</Text>
-     <Text style={{textAlign:'justify',fontFamily: 'Roboto_500Medium',color:theme.textcolor}}>eliisa.punttila@lab.fi</Text>
+     <Text style={{textAlign:'justify',fontWeight:'900',fontFamily: 'Roboto_500Medium',marginVertical:10,color:theme.textcolor}}>Borislav Hristov</Text>
+     <Text style={{textAlign:'justify',fontFamily: 'Roboto_500Medium',color:theme.textcolor}}>Borislav.Hristov@student.lab.fi</Text>
      </View>
      <View style={{marginTop:10}}>
       <Text style={{
@@ -57,18 +60,43 @@ const AboutScreen = () => {
               fontSize: 20,
               fontFamily: 'Roboto_500Medium',
               
-            }}>Communication Manager</Text>
+            }}>Lead Developer</Text>
      </View>
      <View style={{marginVertical:5}}>
-     <Text style={{textAlign:'justify',fontWeight:'900',fontFamily: 'Roboto_500Medium',marginVertical:10,color:theme.textcolor}}>Anna-Riitta Pettinen</Text>
-     <Text style={{textAlign:'justify',fontFamily: 'Roboto_500Medium',color:theme.textcolor}}>anna-riitta.pettinen@lab.fi</Text>
+     <Text style={{textAlign:'justify',fontWeight:'900',fontFamily: 'Roboto_500Medium',marginVertical:10,color:theme.textcolor}}>Amine Tssouli</Text>
+     <Text style={{textAlign:'justify',fontFamily: 'Roboto_500Medium',color:theme.textcolor}}>Amine.Tssouli@student.lab.fi</Text>
      </View>
-     <View style={{marginTop:height}}>
+     <View style={{marginTop:10}}>
+      <Text style={{
+              color: theme.about_color,
+              fontSize: 20,
+              fontFamily: 'Roboto_500Medium',
+              
+            }}>Secondary Developer</Text>
+     </View>
+     <View style={{marginVertical:5}}>
+     <Text style={{textAlign:'justify',fontWeight:'900',fontFamily: 'Roboto_500Medium',marginVertical:10,color:theme.textcolor}}>Anton Ivanov</Text>
+     <Text style={{textAlign:'justify',fontFamily: 'Roboto_500Medium',color:theme.textcolor}}>Anton.Ivanov@student.lab.fi</Text>
+     </View>
+     <View style={{marginTop:10}}>
+      <Text style={{
+              color: theme.about_color,
+              fontSize: 20,
+              fontFamily: 'Roboto_500Medium',
+              
+            }}>Our Partners</Text>
+     </View>
+     <View style={{flexDirection:'row',marginVertical:20,justifyContent:'space-around',shadowColor:'gray',shadowOpacity:1}}>
+        <Lab height={110}  width={110}  fill={theme.textcolor} />
+       <Image  style={{ width: 100, height: 100 }} source={require('../assets/images/logo.png')} />
+
+     </View>
+     <View style={{marginTop:height-200}}>
         <View style={{borderTopColor:'#61CE70',borderTopWidth:2}}>
           <Text style={{marginTop:6,   fontSize: 14,
                   fontFamily: 'Roboto_300Light_Italic',color:'gray'}}>Join our Community and Follow us</Text>
         </View>
-        <View style= {{flexDirection:'row',margin:20,justifyContent:'space-between'}} >
+        <View style= {{flexDirection:'row',marginTop:20,justifyContent:'space-between'}} >
 
                 <TouchableOpacity
                     onPress={()=>{

@@ -1,4 +1,4 @@
-import { View, Text ,SafeAreaView,TouchableOpacity,ImageBackground, Keyboard, StatusBar} from 'react-native';
+import { View, Text ,SafeAreaView,TouchableOpacity,ScrollView,KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard, StatusBar} from 'react-native';
 import Checkbox from 'expo-checkbox';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import CustomButton from '../components/CustomButton';
@@ -94,84 +94,99 @@ const LoginScreen = ( { navigation }) => {
       
    
       }}>
+       
+       <ScrollView showsVerticalScrollIndicator={false}>
+        <KeyboardAvoidingView
+    
+    behavior={Platform.OS === "ios" ? "position" : "height"}
+    style={{flex:1,backgroundColor:theme.backgroundcolor}}
+    >
        <StatusBar animated ={true} barStyle={theme.barStyle} backgroundColor={theme.backgroundcolor} />
-        <View style={{marginBottom:40}}>
+       <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+        <>
+        <View style={{marginBottom:40,flex:1,justifyContent:'center',alignItems:'center'}}>
         <IceImg width={180} height={180} style={{marginTop:40,transform:[{rotate:'-15deg'}]}} /> 
       <Text style={{textAlign:'center',marginTop:40,fontSize:30, fontWeight:'bold', color:theme.textcolor,fontFamily:'Roboto_900Black_Italic',fontSize:34}}>Welcome</Text>
       </View>
 
-      <View style={{width:'80%'}}>  
-         <CustomInput  icon='email' value={email}  placeholder ='Email' keyboardType='email-address' inputType='email-address' onChangeText={text => { handleOnChange(text,'email')}} onFocus= {() => { handleError(null,'email')}} error={errors.email}/>
-         <CustomInput icon='lock'   value={inputs.password} secure={true}  placeholder ='Password' onChangeText ={ (text) => {  handleOnChange(text,'password')}} onFocus= {() => { handleError(null,'password')}} error={errors.password} extraicon={true}/>
+          <View >  
+            <CustomInput  icon='email' value={email}  placeholder ='Email' keyboardType='email-address' inputType='email-address' onChangeText={text => { handleOnChange(text,'email')}} onFocus= {() => { handleError(null,'email')}} error={errors.email}/>
+            <CustomInput icon='lock'   value={inputs.password} secure={true}  placeholder ='Password' onChangeText ={ (text) => {  handleOnChange(text,'password')}} onFocus= {() => { handleError(null,'password')}} error={errors.password} extraicon={true}/>
 
-          <View style={{flexDirection:'row',justifyContent:'space-between',marginBottom:15}}>
-          <View style={{flexDirection:'row'}}>
-                <Checkbox
-                color='#61CE70'
-                value={isSelected}
-                onValueChange={() => setSelection(!isSelected)}
-                style={{marginLeft:10,marginRight:10}}
-                />
-                <Text style={{color:'#61CE70',fontWeight:'700'}}>Remember me</Text>
-          </View>
+              <View style={{flexDirection:'row',justifyContent:'space-between',marginBottom:15}}>
+              <View style={{flexDirection:'row'}}>
+                    <Checkbox
+                    color='#61CE70'
+                    value={isSelected}
+                    onValueChange={() => setSelection(!isSelected)}
+                    style={{marginLeft:10,marginRight:10}}
+                    />
+                    <Text style={{color:'#61CE70',fontWeight:'700'}}>Remember me</Text>
+              </View>
 
-        
-          <TouchableOpacity onPress={() => { navigation.navigate('Resetpassword')}}>
-            <Text style={{color:'#61CE70',fontWeight:'700'}}>Forgot Password ? </Text>
-          </TouchableOpacity>
-          </View>
-        </View>
-
+            
+              <TouchableOpacity onPress={() => { navigation.navigate('Resetpassword')}}>
+                <Text style={{color:'#61CE70',fontWeight:'700'}}>Forgot Password ? </Text>
+              </TouchableOpacity>
+              </View>
+            </View>
+        <View style={{justifyContent:'center',alignItems:'center',marginVertical:20}}>
         <CustomButton label='Login' onPress={ validate } />
         <Text style={{color:theme.textcolor}}>or, login with ...</Text>
-        <View style= {{flexDirection:'row',marginTop:20,marginBottom:20}}>
-              <TouchableOpacity
-                  onPress={()=>{}}
-                  style= {{
-                    borderColor:theme.borderColor,
-                    borderWidth:2,
-                    borderRadius:10,
-                    paddingHorizontal:30,
-                    paddingVertical:10,
-                
-                  }}
-                  >
-              <Google height={24} width={24} />
-              </TouchableOpacity>
-            <TouchableOpacity
-                onPress={()=>{}}
-                style= {{
-                  borderColor:theme.borderColor,
-                  borderWidth:2,
-                  borderRadius:10,
-                  paddingHorizontal:30,
-                  paddingVertical:10,
-                  marginLeft:30
-                }}
-                >
-          <Facebook height={24} width={24} />
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={()=>{}}
-                style= {{
-                  borderColor:theme.borderColor,
-                  borderWidth:2,
-                  borderRadius:10,
-                  paddingHorizontal:30,
-                  paddingVertical:10,
-                  marginLeft:30
-                }}
-                >
-          <Apple height={24} width={24} color={theme.applecolor} />
-            </TouchableOpacity>
+          
         </View>
-        <View style={{flexDirection:'row',justifyContent:'center',marginBottom:30}}>
-        <Text style={{color:theme.textcolor}}>New to the app? </Text>
-        <TouchableOpacity onPress={() => { navigation.navigate('Signup')}}>
-          <Text style={{color:'#61CE70',fontWeight:'700'}}>Register</Text>
-        </TouchableOpacity>
-        </View>
-
+      
+            <View style= {{flexDirection:'row',marginTop:20,marginBottom:20}}>
+                  <TouchableOpacity
+                      onPress={()=>{}}
+                      style= {{
+                        borderColor:theme.borderColor,
+                        borderWidth:2,
+                        borderRadius:10,
+                        paddingHorizontal:30,
+                        paddingVertical:10,
+                    
+                      }}
+                      >
+                  <Google height={24} width={24} />
+                  </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={()=>{}}
+                    style= {{
+                      borderColor:theme.borderColor,
+                      borderWidth:2,
+                      borderRadius:10,
+                      paddingHorizontal:30,
+                      paddingVertical:10,
+                      marginLeft:30
+                    }}
+                    >
+              <Facebook height={24} width={24} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={()=>{}}
+                    style= {{
+                      borderColor:theme.borderColor,
+                      borderWidth:2,
+                      borderRadius:10,
+                      paddingHorizontal:30,
+                      paddingVertical:10,
+                      marginLeft:30
+                    }}
+                    >
+              <Apple height={24} width={24} color={theme.applecolor} />
+                </TouchableOpacity>
+            </View>
+          <View style={{flexDirection:'row',justifyContent:'center',marginBottom:30}}>
+          <Text style={{color:theme.textcolor}}>New to the app? </Text>
+          <TouchableOpacity onPress={() => { navigation.navigate('Signup')}}>
+            <Text style={{color:'#61CE70',fontWeight:'700'}}>Register</Text>
+          </TouchableOpacity>
+          </View>
+          </>
+        </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </SafeAreaView>
   )
 }

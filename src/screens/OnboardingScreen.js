@@ -37,7 +37,7 @@ const OnboardingScreen = ({ navigation }) => {
         }}>
           <StatusBar animated ={true} barStyle={theme.barStyle} backgroundColor={theme.backgroundcolor} />
           <View>
-            <Text style={{marginTop:20,fontSize:40, fontWeight:'bold', color:theme.textcolor,fontFamily:'Roboto_700Bold'}}>BIM-ICE </Text>
+            <Text style={{marginTop:20,fontSize:40, fontWeight:'bold', color:theme.textcolor,fontFamily:'Roboto_700Bold'}}>BIMOLOGY</Text>
         </View>
         <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
         <IceImg width={200} height={200} style={{transform:[{rotate:'-15deg'}]}} /> 
