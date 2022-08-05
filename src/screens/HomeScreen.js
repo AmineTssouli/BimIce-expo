@@ -3,7 +3,7 @@ import {TouchableOpacity, Text,TextInput,View,StatusBar,SafeAreaView} from "reac
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {AuthContext} from '../navigation/AuthProvider';
-import { collection,query,where, getDocs, getDoc, doc, getFirestore } from "firebase/firestore"; 
+import { collection,query,orderBy, getDocs, getDoc, doc, getFirestore } from "firebase/firestore"; 
 
 
 import TermsList from '../components/TermsList';
@@ -60,9 +60,10 @@ useEffect(()=>{
 const getAllTerms =  async () => {
     const db = getFirestore();
     const terms= [];
-        //Create a reference to the users collection
+        //Create a reference to the terms collection
     const termsRef = collection(db, "Terms");
-    const querySnapshot = await getDocs(termsRef);
+    const querySnapshot = await getDocs(query(termsRef,orderBy('created_at','desc')));
+ 
     querySnapshot.forEach(doc => {
       const {name,description,created_at,id} = doc.data();
       terms.push( {
@@ -125,17 +126,7 @@ const getAllTerms =  async () => {
 
         </View> 
     
-{/*         <View  
-         style={{
-            marginVertical:15,
-            flexDirection:'row',
-            justifyContent:'space-between'
-        }}>
-            <Text style={{fontSize:16,fontFamily:'Roboto-Bold',color:'gray'}}>Most searched terms</Text>
-        <TouchableOpacity>
-            <Text style={{color:'#AD40AF'}}>See all</Text>
-        </TouchableOpacity>
-        </View> */}
+
 
 
           

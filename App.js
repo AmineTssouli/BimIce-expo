@@ -27,17 +27,21 @@ const Router = () => {
 
   const {user, setUser} = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
+  const auth = getAuth();
+
 
   // Handle user state changes
 
-  const auth = getAuth();
+  
   onAuthStateChanged(auth, (user) => {
+ 
     setUser(user);
+ 
     if (initializing) setInitializing(false);
   });
   
   if (initializing) return null;
-
+   
 
   return (
     <ThemeContext.Provider value ={ mode === 'light' ? theme.light : theme.dark}>

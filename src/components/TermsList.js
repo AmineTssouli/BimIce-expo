@@ -23,7 +23,7 @@ const TermsList = ({ terms , search, navigation }) => {
     const auth = getAuth();
     const fListRef = useRef();
     const  theme = useContext(ThemeContext);
-    const terms_length = terms.length;
+
    
     const[bookmarked,setBookmarked] = useState([]);
     const [loading,setLoading] = useState(true);

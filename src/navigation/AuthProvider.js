@@ -1,13 +1,15 @@
 import React,{ createContext, useState } from 'react';
 import { Alert }from 'react-native';
 import { auth,db} from '../../firebase'
-import { getAuth  ,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail, signInAnonymously} from 'firebase/auth';
+import { getAuth  ,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail, signInAnonymously, sendEmailVerification} from 'firebase/auth';
 
 
 
 
 
 export const AuthContext = createContext();
+
+
 
 export const AuthProvider = ({  children  }) => {
     const [user,setUser] = useState(null);
@@ -27,11 +29,7 @@ export const AuthProvider = ({  children  }) => {
                 try {
                     const auth =  getAuth();
                     await signInWithEmailAndPassword(auth,email,password)
-                    .then((userCredential) => {
-                        console.log('user credentials',userCredential);
-                        console.log('auth',auth);
-
-                    });
+             
 
                       }
                 
@@ -73,7 +71,12 @@ export const AuthProvider = ({  children  }) => {
                  try {
                     const auth = getAuth();
                     await createUserWithEmailAndPassword(auth,email,password)
-                    .then(() => {
+                    .then( async() => {
+                 
+                      await sendEmailVerification(auth.currentUser).then(()=>{
+                        console.log('Email was sent to you');
+                        Alert.alert("Confirm your email","An Email was sent to you!",);
+                        console.log('Email Verified :',auth.emailVerified);
                         const db = getFirestore();
                         const usersRef = collection(db, "Users");
                      
@@ -82,12 +85,17 @@ export const AuthProvider = ({  children  }) => {
                             email: email,
                             profession: profession,
                             userImg : '',
-                            createdAt:firestore.Timestamp.fromDate(new Date())
+                            createdAt:new Date()
                       });
                 
                         console.log('User added!');
+                      }).catch((err)=> {
+                        console.log("Email Couldn't be sent");
+                      } )
                         
-                    });
+
+                    })
+             
                 }
             catch(error) {
                 
@@ -134,6 +142,19 @@ export const AuthProvider = ({  children  }) => {
             console.log(error.message)
             
            }
+         },
+         sendVerificationAgain: async() => {
+          try {
+            const auth = getAuth();
+            await sendEmailVerification(auth.currentUser);
+            console.log('New Email was sent to you');
+            Alert.alert("Confirm your email","An Email was sent to you!",);
+            
+          } catch (error) {
+            console.log(error.code);
+            
+          }
+
          }
        
         }} >

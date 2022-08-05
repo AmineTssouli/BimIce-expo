@@ -9,7 +9,7 @@ import {
 import Feather from 'react-native-vector-icons/Feather';
 import IceImg from '../assets/images/misc/Ice.svg';
 import ThemeContext from "../utils/ThemeContext";
-import AppLoading from 'expo-app-loading';
+
 import {
   useFonts,
 
@@ -27,9 +27,7 @@ const OnboardingScreen = ({ navigation }) => {
 
     Roboto_900Black_Italic,
   });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+
   return (
       <SafeAreaView style={{
         flex:1,

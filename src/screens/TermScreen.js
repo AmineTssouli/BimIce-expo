@@ -68,8 +68,7 @@ const TermScreen = ({route,navigation}) => {
             <Ionicons name='arrow-back-outline' size={35} color={'#AD40AF'} />
             </TouchableOpacity>
     <View style={{padding:20}}>
-        
-  {console.log(term?.labels)}
+
             
             <View style={[styles.item,{borderColor:theme.section_bordercolor,backgroundColor:theme.section_backgroundcolor}]}  >
                 <Text value={term?.name}  style={styles.name}>{term?.name} </Text>
@@ -79,8 +78,8 @@ const TermScreen = ({route,navigation}) => {
                     <Text style={{fontFamily:'Roboto_300Light_Italic'}} >Labels: </Text>
                     <Text style={{fontFamily:'Roboto_400Regular_Italic',color:'#AD40AF'}}> 
                      
-                     { term?.labels.join(' | ')}
-                 
+                     { term?? Array.isArray(term?.labels)? term?.labels.join(' | '): term?.labels}
+                  
                     </Text>
                 </View>
                 <View  style={{flexDirection:'row',justifyContent:'flex-end',marginTop:30}}>

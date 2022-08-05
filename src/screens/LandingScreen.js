@@ -3,7 +3,7 @@ import React,{useContext} from 'react';
 import ThemeContext from "../utils/ThemeContext";
 import {AuthContext} from '../navigation/AuthProvider';
 import IceImg from '../assets/images/misc/Ice.svg';
-import AppLoading from 'expo-app-loading';
+
 
 import {
   useFonts,
@@ -17,9 +17,7 @@ const LandingScreen = ( { navigation } ) => {
     Roboto_700Bold_Italic,
 
   });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+
   return (
 
     <SafeAreaView style={{

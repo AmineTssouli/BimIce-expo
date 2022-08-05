@@ -38,7 +38,8 @@ const BookmarksList = ({  search,navigation }) => {
       const auth = getAuth();
       const q = query(collection(db, "Bookmarks"), where("userID", "==", auth.currentUser.uid));
       const querySnapshot = await getDocs(q);
-       querySnapshot.forEach(doc => {
+      if(!querySnapshot.empty) {
+          querySnapshot.forEach(doc => {
         const {name,description,userID,termID} = doc.data();
         bookMarkedterms.push( {
            name: name,
@@ -56,6 +57,14 @@ const BookmarksList = ({  search,navigation }) => {
         
      
        }).catch(e =>console.log(e))
+        
+      }else {
+        setBookmarks([]);
+        setBookmarks(bookMarkedterms);
+        if (loading) setLoading(false);
+
+      }
+     
        
     
     

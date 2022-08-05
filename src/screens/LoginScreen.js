@@ -9,7 +9,6 @@ import Apple from '../assets/images/misc/apple.svg';
 import IceImg from '../assets/images/misc/Ice.svg';
 import {AuthContext} from '../navigation/AuthProvider';
 import ThemeContext from "../utils/ThemeContext";
-import AppLoading from 'expo-app-loading';
 import {
   useFonts,
   Roboto_900Black_Italic,
@@ -84,9 +83,7 @@ const LoginScreen = ( { navigation }) => {
     Roboto_900Black_Italic,
 
   });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+ 
 
   return (
     <SafeAreaView  style= {{ 

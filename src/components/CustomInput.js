@@ -2,11 +2,21 @@ import { View, Text,TextInput,StyleSheet,TouchableOpacity } from 'react-native'
 import React,{useContext, useState} from 'react'
 import Entypo from 'react-native-vector-icons/Entypo';
 import ThemeContext from '../utils/ThemeContext';
+import {
+  useFonts,
+  Roboto_700Bold,
+  Roboto_400Regular
+} from '@expo-google-fonts/roboto';
 
 const CustomInput = ({inputType,secure,placeholder,error,handleOnChange,handleError,extraicon,icon,value, ...props}) => {
 
     const [secured,setSecured] = useState(true);
     const theme = useContext(ThemeContext);
+    let [fontsLoaded] = useFonts({
+      Roboto_700Bold,
+      Roboto_400Regular,
+  
+    });
 
   return (
  
@@ -47,7 +57,7 @@ const CustomInput = ({inputType,secure,placeholder,error,handleOnChange,handleEr
   )
 }
 const style = StyleSheet.create({
-    input : {flex:1, padding:10,fontSize:16,fontFamily:'Roboto-Regular'},
+    input : {flex:1, padding:10,fontSize:16,fontFamily:'Roboto_400Regular'},
     error:{color:'red',fontSize:12,marginLeft:25,marginTop:-10}
   
   });
