@@ -1,10 +1,8 @@
-import React, {useEffect,useContext,useState, useRef,useCallback } from 'react';
-import { View, Text,FlatList,StyleSheet ,StatusBar,TouchableOpacity,Alert,RefreshControl} from 'react-native';
+import React, {useContext,useState, useRef,useCallback } from 'react';
+import { View, Text,FlatList,StyleSheet ,TouchableOpacity,Alert,RefreshControl} from 'react-native';
+import { useFocusEffect } from "@react-navigation/native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { getDoc, doc ,deleteDoc,getFirestore } from "firebase/firestore";   
-import { getAuth } from "firebase/auth";   
-import { ActivityIndicator } from 'react-native';
-import { event } from 'react-native-reanimated';
+import { collection,query,orderBy, getDocs, doc, getFirestore,deleteDoc } from "firebase/firestore";    
 import ThemeContext from "../utils/ThemeContext";
 import {
   useFonts,
@@ -13,7 +11,7 @@ import {
 } from '@expo-google-fonts/roboto';
 
 
-const AdminTermsList = ({ terms , search, navigation }) => {
+const AdminTermsList = ({ search, navigation }) => {
     let [fontsLoaded] = useFonts({
       Roboto_700Bold,
       Roboto_400Regular_Italic
@@ -22,12 +20,51 @@ const AdminTermsList = ({ terms , search, navigation }) => {
 
     const fListRef = useRef();
     const  theme = useContext(ThemeContext);
-   
- 
     const [loading,setLoading] = useState(true);
-
     const [scrollPosition,setScrollPosition]= useState(0);
     const [position,setPosition] = useState(0);
+    const [allTerms,setAllTerms] = useState([]);
+
+    const getAllTerms =  async () => {
+      const db = getFirestore();
+      const terms= [];
+          //Create a reference to the terms collection
+      const termsRef = collection(db, "Terms");
+      const querySnapshot = await getDocs(query(termsRef,orderBy('created_at','desc')));
+      querySnapshot.forEach(doc => {
+        const {name,description,created_at,id} = doc.data();
+        terms.push( {
+           id : id, 
+           name: name,
+           description:description,
+           created_at:created_at
+        });
+  
+        
+  
+      })
+     
+  
+      setAllTerms([]);
+      setAllTerms(terms);
+      if (loading) setLoading(false);
+  
+     
+  
+  
+  }
+  
+  
+  
+  useFocusEffect(
+      useCallback(() => { 
+            getAllTerms();
+            navigation.addListener('focus', () => { setLoading(!loading)});
+            
+        },[navigation,loading])
+  );  
+  
+
     const showConfirmDialog = (id) => {
         return Alert.alert(
           "Are your sure?",
@@ -43,7 +80,9 @@ const AdminTermsList = ({ terms , search, navigation }) => {
                     const db = getFirestore();
                     await deleteDoc(doc(db, "Terms",id));
                     console.log('Succefully deleted');
-                    navigation.navigate('Home')
+                   
+                    navigation.navigate("Admin");
+                    setLoading(true);
                     
                 } catch (error) {
                     console.log('######## Erros occured #######');
@@ -120,7 +159,8 @@ const AdminTermsList = ({ terms , search, navigation }) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
       }
       const [refreshing, setRefreshing] = useState(false);
-      const onRefresh = React.useCallback(() => {
+      const onRefresh = useCallback(() => {
+        setLoading(true);
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
       }, []);
@@ -138,7 +178,7 @@ const AdminTermsList = ({ terms , search, navigation }) => {
             });
           }}
             initialScrollIndex={scrollPosition}
-            data={terms}
+            data={allTerms}
             renderItem={RenderItem}
             keyExtractor={item => item.id}
             ListEmptyComponent ={NotFound}

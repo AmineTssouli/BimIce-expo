@@ -1,8 +1,8 @@
 import React, { useContext, useEffect,useState } from 'react';
-import { View, Text,FlatList,StyleSheet ,StatusBar,TouchableOpacity} from 'react-native';
+import { View, Text,FlatList,StyleSheet ,TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ThemeContext from "../utils/ThemeContext";
-import { collection,query,where, getDocs, getDoc,setDoc, doc ,deleteDoc,getFirestore } from "firebase/firestore"; 
+import { collection,query,where, getDocs, doc ,deleteDoc,getFirestore } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";    
 import {
   useFonts,

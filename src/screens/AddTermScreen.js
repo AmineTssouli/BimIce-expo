@@ -1,10 +1,9 @@
 import { View, Text,Platform, ScrollView,TouchableOpacity,StatusBar,StyleSheet, TextInput,KeyboardAvoidingView,TouchableWithoutFeedback,Keyboard, SafeAreaView,Alert} from 'react-native'
-import React,{useContext, useEffect,useState} from 'react'
+import React,{useContext,useState} from 'react'
 import { doc, setDoc,getFirestore ,collection} from "firebase/firestore";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomInput from '../components/CustomInput';
-import CustomButton from '../components/CustomButton';
-import { getAuth} from 'firebase/auth';
+
 
 
 import {
@@ -21,7 +20,7 @@ const AddTermScreen = ({route,navigation}) => {
     const [description,setDescription] =useState('');
     const [labels,setLabels] = useState('');
     const [errors,setErrors] = useState({})
-
+   
     let [fontsLoaded] = useFonts({
         Roboto_700Bold,
         Roboto_400Regular,
@@ -49,8 +48,12 @@ const AddTermScreen = ({route,navigation}) => {
             created_at:new Date()
       });
 
-      console.log('Term added!');
-      Alert.alert("Nicely done!","Go back and check the new update",);
+      Alert.alert("Nicely done!","Go back and check the new update");
+      setName('');
+      setDescription(''); 
+      setLabels('');
+   
+
     } catch (error) {
         console.error(error.message);
         
@@ -115,18 +118,20 @@ const AddTermScreen = ({route,navigation}) => {
             
             <View style={{flex:1,padding:20}}>
                 <View style={{justifyContent:'center',alignItems:'center'}}>
-                    <Text style={{color:theme.textcolor,fontSize:22,color:'#AD40AF'}}> Add new Term</Text>
+                    <Text style={{color:theme.textcolor,fontSize:22,color:'#AD40AF'}}> Add new term</Text>
                 </View>
                     <View >
                         <Text style={{margin:10,color:theme.textcolor,fontWeight:'bold',color:'#AD40AF'}}>Name</Text>
                         <CustomInput placeholder={'Name'} value={name} 
                         onChangeText ={ (text) => {  setName(text)}} 
                         onFocus= {() => { handleError(null,'name')}}
-                        error={errors.name} />
+                        error={errors.name}
+                        autoCapitalize='sentences'
+                        />
             
                                     <Text style={{margin:10,color:theme.textcolor,fontWeight:'bold',color:'#AD40AF'}}>Description</Text>
                                 <TextInput
-                                   
+                                   autoCapitalize='sentences'
                                     multiline 
                                     placeholder={'Description'}
                                     placeholderTextColor='gray'
@@ -149,7 +154,7 @@ const AddTermScreen = ({route,navigation}) => {
                                 />
                                 {errors.description && <Text style={{color:'red',fontSize:12,marginLeft:25,marginTop:10}}>{errors.description}</Text>}
                                 <Text style={{margin:10,color:theme.textcolor,fontWeight:'bold',color:'#AD40AF'}}>Labels</Text>
-                                <CustomInput placeholder={'Seperate Labels with comma'} value={labels} 
+                                <CustomInput autoCapitalize='sentences' placeholder={'Seperate Labels with comma'} value={labels} 
                                 onChangeText ={ (text) => {  setLabels(text)}} 
                                 onFocus= {() => { handleError(null,'labels')}}
                                 error={errors.labels}/>
@@ -184,7 +189,6 @@ const AddTermScreen = ({route,navigation}) => {
                             setLabels('');
                             setErrors(''); 
 
-                            navigation.navigate(route.params.origin)
                         }}
                         style={{
                             backgroundColor:'red',
@@ -202,7 +206,7 @@ const AddTermScreen = ({route,navigation}) => {
                             fontFamily:'Roboto_400Regular'
                         
                             }}>
-                            Cancel
+                            Clear
                         </Text>
                         </TouchableOpacity>
                         </View>

@@ -1,4 +1,4 @@
-import { View, Text,SafeAreaView ,TouchableOpacity, Linking,StatusBar,Image} from 'react-native'
+import { View, Text,SafeAreaView ,TouchableOpacity, Linking,StatusBar,Image, ScrollView} from 'react-native'
 import React, { useContext } from 'react'
 import Facebook from '../assets/images/misc/facebook.svg';
 import Instagram from '../assets/images/misc/instagram.svg';
@@ -27,12 +27,12 @@ const AboutScreen = () => {
   return (
     
     <SafeAreaView  style={{flex:1,backgroundColor: theme.backgroundcolor}} >
-      <View style={{flex:1,padding:20}}>
+      <ScrollView style={{flex:1,padding:20}}>
       <StatusBar animated ={true} barStyle={theme.barStyle} backgroundColor={theme.backgroundcolor} />
      <View style={{marginTop:10}}>
       <Text style={{
-              color: theme.about_color,
-              fontSize: 20,
+              color: theme.secondary,
+              fontSize: 24,
               fontFamily: 'Roboto_500Medium',
               
             }}>What is BIMOLOGY</Text>
@@ -44,8 +44,8 @@ const AboutScreen = () => {
      </View>
      <View  style={{marginTop:10}}>
       <Text style={{
-              color: theme.about_color,
-              fontSize: 20,
+              color: theme.secondary,
+              fontSize: 24,
               fontFamily: 'Roboto_500Medium',
               
             }}>Project Manager</Text>
@@ -56,8 +56,8 @@ const AboutScreen = () => {
      </View>
      <View style={{marginTop:10}}>
       <Text style={{
-              color: theme.about_color,
-              fontSize: 20,
+              color: theme.secondary,
+              fontSize: 24,
               fontFamily: 'Roboto_500Medium',
               
             }}>Lead Developer</Text>
@@ -68,30 +68,35 @@ const AboutScreen = () => {
      </View>
      <View style={{marginTop:10}}>
       <Text style={{
-              color: theme.about_color,
-              fontSize: 20,
+              color: theme.secondary,
+              fontSize: 24,
               fontFamily: 'Roboto_500Medium',
               
-            }}>Secondary Developer</Text>
+            }}>Junior Developers</Text>
      </View>
      <View style={{marginVertical:5}}>
      <Text style={{textAlign:'justify',fontWeight:'900',fontFamily: 'Roboto_500Medium',marginVertical:10,color:theme.textcolor}}>Anton Ivanov</Text>
      <Text style={{textAlign:'justify',fontFamily: 'Roboto_500Medium',color:theme.textcolor}}>Anton.Ivanov@student.lab.fi</Text>
      </View>
+     <View style={{marginVertical:5}}>
+     <Text style={{textAlign:'justify',fontWeight:'900',fontFamily: 'Roboto_500Medium',marginVertical:10,color:theme.textcolor}}>Artyom Kamnev</Text>
+     <Text style={{textAlign:'justify',fontFamily: 'Roboto_500Medium',color:theme.textcolor}}>Artyom.Kamnev@student.lab.fi</Text>
+     </View>
+
      <View style={{marginTop:10}}>
       <Text style={{
-              color: theme.about_color,
+              color: theme.secondary,
               fontSize: 20,
               fontFamily: 'Roboto_500Medium',
               
             }}>Our Partners</Text>
      </View>
-     <View style={{flexDirection:'row',marginVertical:20,justifyContent:'space-around',shadowColor:'gray',shadowOpacity:1}}>
+     <View style={{flexDirection:'row',marginVertical:10,justifyContent:'space-around',shadowColor:'gray',shadowOpacity:1}}>
         <Lab height={110}  width={110}  fill={theme.textcolor} />
        <Image  style={{ width: 100, height: 100 }} source={require('../assets/images/logo.png')} />
 
      </View>
-     <View style={{marginTop:height-200}}>
+     <View style={{marginBottom:50}}>
         <View style={{borderTopColor:'#61CE70',borderTopWidth:2}}>
           <Text style={{marginTop:6,   fontSize: 14,
                   fontFamily: 'Roboto_300Light_Italic',color:'gray'}}>Join our Community and Follow us</Text>
@@ -130,7 +135,7 @@ const AboutScreen = () => {
 
             </View>
       </View>
-        </View>
+        </ScrollView>
     </SafeAreaView>
   )
 }

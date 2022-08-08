@@ -1,8 +1,7 @@
 import React,{ createContext, useState } from 'react';
-import { Alert }from 'react-native';
-import { auth,db} from '../../firebase'
+import { Alert } from 'react-native';
 import { getAuth  ,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail, signInAnonymously, sendEmailVerification} from 'firebase/auth';
-
+import { doc, setDoc,getFirestore ,collection} from "firebase/firestore";
 
 
 

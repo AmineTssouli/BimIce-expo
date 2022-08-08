@@ -11,10 +11,8 @@ import {
 } from '@react-navigation/drawer';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
 import {AuthContext} from '../navigation/AuthProvider';
-import {firestore} from '../../firebase';
+import {firestore} from '../../firebase'; // important to have this line to initialize the app
 import ThemeContext from "../utils/ThemeContext";
 import {
   useFonts,
@@ -28,7 +26,7 @@ const CustomDrawer = props => {
 
   const theme = useContext(ThemeContext);
   const {user,logout} = useContext(AuthContext);
-  const [userData,setUserData] = useState();
+
 
 
 
@@ -36,7 +34,7 @@ const onShare = async () => {
   try {
     const result = await Share.share({
       message:
-        'BIM ICE | A place for finding terms easily',
+        'BIMOLOGY | A place for finding terms easily',
     });
     if (result.action === Share.sharedAction) {
       if (result.activityType) {
@@ -58,7 +56,7 @@ const onShare = async () => {
         >
 
         <View style={{flex: 1, paddingTop: 10}}>
-          <DrawerItemList  {...props} />
+          <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc'}}>

@@ -1,10 +1,9 @@
-import React, {useEffect,useContext,useState, useRef } from 'react';
-import { View, Text,FlatList,StyleSheet ,StatusBar,TouchableOpacity} from 'react-native';
+import React, {useEffect,useContext,useState, useRef,useCallback } from 'react';
+import { View, Text,FlatList,StyleSheet ,TouchableOpacity,RefreshControl} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { collection,query,where, getDocs, getDoc,setDoc, doc ,deleteDoc,getFirestore } from "firebase/firestore";   
+import { collection,query,where, getDocs,setDoc, doc ,deleteDoc,getFirestore } from "firebase/firestore";   
 import { getAuth } from "firebase/auth";   
 import { ActivityIndicator } from 'react-native';
-import { event } from 'react-native-reanimated';
 import ThemeContext from "../utils/ThemeContext";
 import {
   useFonts,
@@ -157,17 +156,20 @@ const TermsList = ({ terms , search, navigation }) => {
 
 
     const NotFound = () => {
-      return (
-     <View style={{marginTop:20}}>
-      <Text style={{color:theme.textcolor}}>Sorry, we didn't find anything matching your search.</Text>
-     </View>
-      )
+    return <ActivityIndicator />
+  
     };
-     if(loading)
-     {
-      return <ActivityIndicator />
-     }
-     else {
+    const wait = (timeout) => {
+      return new Promise(resolve => setTimeout(resolve, timeout));
+    }
+    const [refreshing, setRefreshing] = useState(false);
+    const onRefresh = useCallback(() => {
+      setLoading(true);
+      setRefreshing(true);
+      wait(2000).then(() => setRefreshing(false));
+    }, []);
+
+
 
       return (
         
@@ -182,16 +184,23 @@ const TermsList = ({ terms , search, navigation }) => {
           }}
             initialScrollIndex={scrollPosition}
             data={terms}
-            renderItem={loading?<ActivityIndicator />:RenderItem}
+            renderItem={RenderItem}
             keyExtractor={item => item.id}
             ListEmptyComponent ={NotFound}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }
+  
     
           />
        
        
       ) };
       
-      }    
+      
 const styles = StyleSheet.create({
     container: {
       flex: 1

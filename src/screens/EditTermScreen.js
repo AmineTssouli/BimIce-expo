@@ -3,9 +3,6 @@ import React,{useContext, useEffect,useState} from 'react'
 import { doc, getDoc, updateDoc,getFirestore ,collection} from "firebase/firestore";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomInput from '../components/CustomInput';
-import CustomButton from '../components/CustomButton';
-import { getAuth} from 'firebase/auth';
-
 
 import {
     useFonts,
@@ -221,8 +218,6 @@ const EditTermScreen = ({route,navigation}) => {
                             setDescription(''); 
                             setLabels('');
                             setErrors(''); 
-
-                            navigation.navigate(route.params.origin)
                         }}
                         style={{
                             backgroundColor:'red',
@@ -240,7 +235,7 @@ const EditTermScreen = ({route,navigation}) => {
                             fontFamily:'Roboto_400Regular'
                         
                             }}>
-                            Cancel
+                            Clear
                         </Text>
                         </TouchableOpacity>
                         </View>

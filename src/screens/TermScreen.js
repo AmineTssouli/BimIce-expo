@@ -64,7 +64,7 @@ const TermScreen = ({route,navigation}) => {
    
     <SafeAreaView  style={{flex:1,backgroundColor:theme.backgroundcolor}} >
     <StatusBar animated ={true} barStyle={theme.barStyle} backgroundColor={theme.backgroundcolor} />
-    <TouchableOpacity onPress={()=> navigation.navigate(route.params.origin)}  style={{flexDirection:'row',alignItems:'baseline',padding:10,margin:10}} >
+    <TouchableOpacity onPress={()=> { setTerm(null); navigation.navigate(route.params.origin)}}  style={{flexDirection:'row',alignItems:'baseline',padding:10,margin:10}} >
             <Ionicons name='arrow-back-outline' size={35} color={'#AD40AF'} />
             </TouchableOpacity>
     <View style={{padding:20}}>

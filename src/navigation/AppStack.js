@@ -1,7 +1,6 @@
-import React,{useContext, useEffect, useState} from 'react'
-import { createDrawerNavigator, } from '@react-navigation/drawer';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import React,{useContext, useState} from 'react'
+import { createDrawerNavigator} from '@react-navigation/drawer';
+import { useFocusEffect } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
 import CustomDrawer from '../components/CustomDrawer';
@@ -17,7 +16,7 @@ import AdminScreen from '../screens/AdminScreen';
 import AddTermScreen from '../screens/AddTermScreen';
 import EditTermScreen from '../screens/EditTermScreen';
 import VerifyemailScreen from '../screens/VerifyemailScreen';
-import {AuthContext} from '../navigation/AuthProvider';
+
 import {
   useFonts,
   Roboto_500Medium
@@ -28,9 +27,7 @@ import {
 const Drawer = createDrawerNavigator();
 
 const AppStack = () => {
-  const [loading,setLoading] = useState(true);
   const [isVerified,setIsVerified] = useState(false);
-  const navigation = useNavigation();
 
   let [fontsLoaded] = useFonts({
     Roboto_500Medium
@@ -38,7 +35,6 @@ const AppStack = () => {
   const theme = useContext(ThemeContext);
   let auth =  getAuth();
 
-  const {user} = useContext(AuthContext);
   useFocusEffect( ()=>{
       async function checkUserEmail() {
       await auth.currentUser.reload();
@@ -121,12 +117,12 @@ const AppStack = () => {
            
       
       
-      <Drawer.Screen component={MessagesScreen} name='Messages' options={{
+{/*       <Drawer.Screen component={MessagesScreen} name='Messages' options={{
         headerShown:true,
           drawerIcon:({color})=> (
               <Ionicons name='chatbox-ellipses' size={22} color={color} />
           )
-      }} />
+      }} /> */}
      
       <Drawer.Screen component={BookmarksScreen} name='Bookmarks' options={{
         headerShown:true,

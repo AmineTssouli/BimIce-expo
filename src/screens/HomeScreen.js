@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {TouchableOpacity, Text,TextInput,View,StatusBar,SafeAreaView} from "react-native";
+import {TextInput,View,StatusBar,SafeAreaView} from "react-native";
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {AuthContext} from '../navigation/AuthProvider';

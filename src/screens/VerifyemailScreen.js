@@ -1,5 +1,5 @@
-import { View, Text,SafeAreaView ,TouchableOpacity, Linking,StatusBar} from 'react-native'
-import React, { useContext, useEffect } from 'react'
+import { View, Text,SafeAreaView,StatusBar} from 'react-native'
+import React, { useContext } from 'react'
 import ThemeContext from "../utils/ThemeContext";
 import { getAuth } from "firebase/auth"; 
 import CustomButton from '../components/CustomButton';

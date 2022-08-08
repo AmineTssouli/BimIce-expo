@@ -39,7 +39,7 @@ const CustomInput = ({inputType,secure,placeholder,error,handleOnChange,handleEr
             placeholderTextColor='gray'
             keyboardType={inputType?'email-address':'default'}
             secureTextEntry={secure && secured?true:false} 
-            autoCapitalize ='none'
+            autoCapitalize = {props.autoCapitalize? 'sentences':'none'}
             value={value}
            
 
